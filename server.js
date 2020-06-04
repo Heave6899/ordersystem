@@ -25,6 +25,10 @@ const displayRouter = require('./routes/display');
 
 app.use('/form', formRouter);
 app.use('/display', displayRouter);
+function handleRedirect(req, res) {
+    res.redirect('/form');
+  }
+app.get('*', handleRedirect);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);
