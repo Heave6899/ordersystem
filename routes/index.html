@@ -1,0 +1,145 @@
+<html>
+
+<head>
+    <title>Order entry</title>
+    <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body style="padding: 0% 5%;">
+    <!--Section: Contact v.2-->
+    <div class="container">
+        <section class="mb-4">
+
+            <!--Section heading-->
+            <h2 class="h1-responsive font-weight-bold text-center my-4">Form</h2>
+            <!--Section description-->
+
+            <div class="row">
+
+                <!--Grid column-->
+
+                <form id="addform" name="addform" action="/form" method="post">
+
+                    <!--Grid row-->
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0 form-group">
+                                <label for="party" class="">Party Name</label>
+                                <input type="text" id="party" name="party" class="form-control" placeholder="Party Name" required>
+
+                            </div>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0 form-group">
+                                <label for="date" class="">Date</label>
+                                <input type="text" id="date" name="date" disabled class="form-control">
+                            </div>
+                        </div>
+                        <!--Grid column-->
+
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="md-form mb-0 form-group">
+                                <label for="size" class="">Size</label>
+                                <select class="form-control custom-select" name="size" id="size" required> 
+                                    <option value="75 mm">75 mm</option>
+                                    <option value="100 mm">100 mm</option>
+                                    <option value="150 mm">150 mm</option>
+                                    <option value="200 mm">200 mm</option>
+                                    <option value="300 mm">300 mm</option>
+                                    <option value="450 mm">450 mm</option>
+                                    <option value="500 mm">500 mm</option>
+                                    <option value="600 mm">600 mm</option>
+                                    <option value="Other">Others</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="md-form mb-0 form-group">
+                                <label for="other" class="">Other dimensions</label>
+                                <input type="text" id="other" name="other" class="form-control"
+                                    placeholder="enter dimensions" disabled='disabled'> </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="md-form mb-0 form-group">
+                                <label for="type1" class="">Type 1</label>
+                                <select class="form-control custom-select" name="type1" id="type1">
+                                    <option value="HV">HV</option>
+                                    <option value="RG">RG</option>
+                                    <option value="MD">MD</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="md-form mb-0">
+                                <label for="type2" class="">Type 2</label>
+                                <select class="form-control custom-select" name="type2" id="type2">
+                                    <option value="MCN">MCN</option>
+                                    <option value="MNL">MNL</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Grid row-->
+
+                    <!--Grid row-->
+                    <div class="row">
+
+                        <!--Grid column-->
+                        <div class="col-md-12">
+                            <div class="md-form">
+                                <label for="box" class="">Boxes</label>
+                                    <input type="text" id="box" required name="box" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+            </div>
+            <!--Grid row-->
+
+            </form>
+
+            <div class="text-center text-md-left">
+                <a class="btn btn-primary" onclick="var queryString = $('#addform').serialize(); console.log(queryString); document.getElementById('addform').submit();">Send</a>
+            </div>
+            <div class="status"></div>
+            <!--Grid column-->
+
+
+
+    </div>
+
+    </section>
+    </div>
+    <script>
+        document.getElementById('date').value = Date();
+        console.log(document.getElementById('date').value);
+        $(function () {
+            $("#size").change(function () {
+                if ($(this).val() == "Other") {
+                    $("#other").removeAttr("disabled");
+                    $("#other").focus();
+                } else {
+                    $("#other").attr("disabled", "disabled");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
