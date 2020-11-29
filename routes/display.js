@@ -1,5 +1,5 @@
 const express = require('express');
-let Display = require('../models/form.model.js');
+let Display = require('../models/data.model.js');
 const router = express();
 router.set('view engine', 'ejs');
 const bodyParser = require('body-parser');
@@ -15,15 +15,15 @@ router.get('/', function (req, res) {
     })
 });
 
-router.post('/', urlencodedParser, (req, res) => {
-    const _id = req.body._id;
-    var myquery = { _id: _id };
-    var newvalues = { $set: { checked: false } };
-    Display.updateOne(myquery, newvalues, function (err, res) {
-        if (err) throw err;
-        console.log("1 document updated");
-    });
-    res.redirect('/display');
-});
+// router.post('/', urlencodedParser, (req, res) => {
+//     const _id = req.body._id;
+//     var myquery = { _id: _id };
+//     var newvalues = { $set: { checked: false } };
+//     Display.updateOne(myquery, newvalues, function (err, res) {
+//         if (err) throw err;
+//         console.log("1 document updated");
+//     });
+//     res.redirect('/display');
+// });
 
 module.exports = router;

@@ -15,11 +15,11 @@
 
 <body style="padding: 0% 5%;">
   <div class="container">
-    <h2>ORDER DETAILS</h2>
+    <h2>DATA DETAILS</h2>
 
     <!-- foreach starts-->
     <% form.forEach(function(form){ %>
-      <%if (form.checked == true) {%>
+      <%if (form) {%>
     <div class="row" id=<%=form._id%>>
       <div class="col-md-6">
         
@@ -33,41 +33,39 @@
             <td><%= form.date %></td>
           </tr>
           <tr>
-            <th class="thead-dark">Party Name</th>
-            <td><%= form.party %></td>
+            <th class="thead-dark">Voltage 1</th>
+            <td><%= form.v1 %></td>
           </tr>
 
           <%if (form.size=="Other"){%>
             <tr>
-              <th class="thead-dark">Size</th>
-              <td><%= form.other %></td>
+              <th class="thead-dark">Voltage 2</th>
+              <td><%= form.v2 %></td>
             </tr>
           <%} else{%>
           <tr>
-            <th class="thead-dark">Size</th>
-            <td><%= form.size %></td>
+            <th class="thead-dark">Voltage 3</th>
+            <td><%= form.v3 %></td>
           </tr>
           <%}%>
           
           
           <tr>
-            <th class="thead-dark">Type1</th>
-            <td><%= form.type1 %></td>
+            <th class="thead-dark">Current 1</th>
+            <td><%= form.i1 %></td>
           </tr>
           <tr>
-            <th class="thead-dark">Type2</th>
-            <td><%= form.type2 %></td>
+            <th class="thead-dark">Current 2</th>
+            <td><%= form.i2 %></td>
           </tr>
           <tr>
-            <th class="thead-dark">Boxes</th>
-            <td><%= form.box %></td>
+            <th class="thead-dark">Current 3</th>
+            <td><%= form.i3 %></td>
           </tr>
         </table>
       </div>
       <div class="col-md-6">
-        <div class="text-center text-md-left">
-          <a class="btn btn-dark" style="color: white;" onclick="$('<%='#'+form._id%>').remove(); $.post('http://localhost:5000/display',{ _id: '<%=form._id%>'});">Dismiss</a>
-      </div>
+       
       </div>
     </div>
     <hr>
