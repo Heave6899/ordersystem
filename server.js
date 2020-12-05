@@ -6,7 +6,7 @@ let data = require('./models/data.model.js');
 
 require('dotenv').config();
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 4003;
 
 //middleware
 app.use(cors());
@@ -49,10 +49,10 @@ const dataRouter = require('./routes/display');
 
 //app.use('/form', formRouter);
 app.use('/display',dataRouter);
-function handleRedirect(req, res) {
-    res.redirect('/display');
-  }
-app.get('*', handleRedirect);
+// function handleRedirect(req, res) {
+//     res.redirect('/display/1');
+//   }
+// app.get('*', handleRedirect);
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`);

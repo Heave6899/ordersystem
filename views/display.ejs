@@ -4,7 +4,7 @@
 <head>
   <meta http-equiv="refresh" content="15">.
   <title>Order Display</title>
-  <meta name = "viewport" content = "width = device-width, initial-scale = 1.0">
+  <meta name="viewport" content="width = device-width, initial-scale = 1.0">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -16,63 +16,87 @@
 <body style="padding: 0% 5%;">
   <div class="container">
     <h2>DATA DETAILS</h2>
-
-    <!-- foreach starts-->
-    <% form.forEach(function(form){ %>
-      <%if (form) {%>
-    <div class="row" id=<%=form._id%>>
-      <div class="col-md-6">
-        
-        <table class="table table-hover table-striped" >
+    <div class="row">
+      <div style="display: flex;">
+        <form action="/display/save" method="post">
+          <input class="btn btn-primary" type="submit" name="Save" value="Save" />
+        </form>
+        </div>
+      <div style="margin-left: 1%;">
+        <input class="form-control p-1 bg-light shadow-sm mb-4" id="inputFilter" type="search" placeholder="Search.." />
+        </div>
+        <table class="table table-hover table-striped" id="customerTable">
+          <thead>
           <tr>
-            <th class="thead-dark">ID</th>
-            <td><%= form._id %></td>
-          </tr>
-          <tr>
-            <th class="thead-dark">Date</th>
-            <td><%= form.date %></td>
-          </tr>
-          <tr>
+            <th class="thead-dark">Machine</th>
             <th class="thead-dark">Voltage 1</th>
-            <td><%= form.v1 %></td>
-          </tr>
-
-          <%if (form.size=="Other"){%>
-            <tr>
-              <th class="thead-dark">Voltage 2</th>
-              <td><%= form.v2 %></td>
-            </tr>
-          <%} else{%>
-          <tr>
+            <th class="thead-dark">Voltage 2</th>
             <th class="thead-dark">Voltage 3</th>
-            <td><%= form.v3 %></td>
-          </tr>
-          <%}%>
-          
-          
-          <tr>
             <th class="thead-dark">Current 1</th>
-            <td><%= form.i1 %></td>
-          </tr>
-          <tr>
             <th class="thead-dark">Current 2</th>
-            <td><%= form.i2 %></td>
-          </tr>
-          <tr>
             <th class="thead-dark">Current 3</th>
-            <td><%= form.i3 %></td>
           </tr>
+        </thead>
+        <tbody>
+          <!-- foreach starts-->
+          <% for (var i = 0; i < form.length; i++) { %>
+          <tr>
+            <td><%= form[i].topic %></td>
+            <td><%= form[i].v1 %> V</td>
+            <td><%= form[i].v2 %> V</td>
+            <td><%= form[i].v3 %> V</td>
+            <td><%= form[i].i1 %> A</td>
+            <td><%= form[i].i2 %> A</td>
+            <td><%= form[i].i3 %> A</td>
+          </tr>
+          <% } %>
+        </tbody>
+          <tfoot>
+           
+          </tfoot>
         </table>
-      </div>
-      <div class="col-md-6">
-       
-      </div>
     </div>
-    <hr>
-  <%}%>
-  <% }) %>
-</div>
-<!--foreach ends-->
+    <div style="display: flex;">
+      <% if (pages > 0) { %>
+        <ul class="pagination">
+          <% if (current == 1) { %>
+          <li class="page-item disabled"><a>First&nbsp;</a></li>
+          <% } else { %>
+          <li class="page-item"><a class="page-link" href="/display/1">First&nbsp;</a></li>
+          <% } %>
+          <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+          <% if (i !== 1) { %>
+          <li class="page-item disabled"><a class="page-link">&nbsp;...</a></li>
+          <% } %>
+          <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+          <% if (i == current) { %>
+          <li class="page-item active"><a class="page-link">&nbsp;<%= i %></a></li>
+          <% } else { %>
+          <li class="page-item"><a class="page-link" href="/display/<%= i %>">&nbsp;<%= i %>&nbsp;</a></li>
+          <% } %>
+          <% if (i == Number(current) + 4 && i < pages) { %>
+          <li class="page-item disabled"><a class="page-link">&nbsp;...&nbsp;</a></li>
+          <% } %>
+          <% } %>
+          <% if (current == pages) { %>
+          <li class="page-item disabled"><a class="page-link">&nbsp;Last</a></li>
+          <% } else { %>
+          <li class="page-item"><a class="page-link" href="/display/<%= pages %>">Last</a></li>
+          <% } %>
+        </ul>
+        <% } %>
+      </div>
+      
+  </div>
+  <!--foreach ends-->
+  <script>
+    $("#inputFilter").on("keyup", function() {
+      var inputValue = $(this).val().toLowerCase();
+      $("#customerTable tr").filter(function() {
+        $(this).toggle($(this).text().indexOf(inputValue) > -1)
+      });
+  });
+  </script>
 </body>
 
 </html>
